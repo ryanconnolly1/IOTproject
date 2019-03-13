@@ -1,0 +1,9 @@
+e1013-09:/ s00186816$ cd
+e1013-09:~ s00186816$ ls
+Desktop		Downloads	Movies		Pictures
+Documents	Library		Music		Public
+e1013-09:~ s00186816$ cd Downloads
+e1013-09:Downloads s00186816$ scp Brusies.mp3 root@192.168.2.165:/root/
+root@192.168.2.165's password: 
+Brusies.mp3                                    91% 4384KB 651.9KB/s   00:00 ETAscp: /root//Brusies.mp3: No space left on device
+Brusies.mp3                                   100% 4818KB 744.6KB/s   00:06
