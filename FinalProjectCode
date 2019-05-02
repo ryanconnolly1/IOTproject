@@ -1,0 +1,53 @@
+#define BLYNK_PRINT Serial
+
+
+#include <Bridge.h>
+#include <Process.h>
+
+#include <BlynkSimpleYun.h>
+
+#include <Blynk.h>
+
+const int buttonPin = 2;
+const int ledPin =  13;
+const int appButton = 6;
+
+int appstate = 0;
+int buttonState = 0;
+Process p;
+
+// You should get Auth Token in the Blynk App.
+// Go to the Project Settings (nut icon).
+char auth[] = "d98e1cd1e5f04630b4d75b43b7f6c24c";
+
+
+void setup()
+{
+  // Debug console
+  Bridge.begin();
+  Serial.begin(9600);
+  pinMode(ledPin, OUTPUT);      
+  pinMode(buttonPin, INPUT);
+  pinMode(appButton,INPUT);  
+
+  Blynk.begin(auth);
+  // You can also specify server:
+  //Blynk.begin(auth, "blynk-cloud.com", 80);
+  //Blynk.begin(auth, IPAddress(192,168,1,100), 8080);
+}
+
+void loop()
+{
+ Blynk.run();
+ buttonState = digitalRead(buttonPin);
+ appstate = digitalRead(appButton);
+  if (buttonState == HIGH || appButton == HIGH ) {     
+    digitalWrite(ledPin, HIGH);  
+    p.runShellCommand("madplay /root/Brusies.mp3");
+    while(p.running());  
+    Serial.println("it works!");
+  } 
+  else {
+    digitalWrite(ledPin, LOW); 
+  }
+}
